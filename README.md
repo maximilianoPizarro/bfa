@@ -1,1 +1,3 @@
 # bfa
+
+ oc apply -f .

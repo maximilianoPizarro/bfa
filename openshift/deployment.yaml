@@ -30,7 +30,7 @@ spec:
       containers:
         - name: nodo-bfa
           image: >-
-            bfaar/nodo:test
+            image-registry.openshift-image-registry.svc:5000/mpizarro-dev/nodo-bfa@sha256:a05ef0e14e1694eb14b8741f2abc310abd88ccd2fd806f61f17e7cd1c1e3d47d
           ports:
             - containerPort: 30303
               protocol: TCP
