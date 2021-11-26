@@ -1,5 +1,5 @@
-kind: Deployment
-apiVersion: apps/v1
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
 metadata:
   name: nodo-bfa
   labels:
@@ -11,8 +11,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: nodo-bfa
+    app: nodo-bfa
   template:
     metadata:
       creationTimestamp: null
@@ -23,7 +22,7 @@ spec:
         openshift.io/generated-by: OpenShiftWebConsole
     spec:
       restartPolicy: Always
-      serviceAccountName: buildah-sa
+      serviceAccountName: default
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       securityContext: {}
@@ -47,16 +46,21 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: IfNotPresent
-      serviceAccount: buildah-sa
+      serviceAccount: default
       volumes:
         - name: nodo-bfa-1
           persistentVolumeClaim:
             claimName: pvc-bfa
       dnsPolicy: ClusterFirst
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
       maxUnavailable: 25%
       maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
   revisionHistoryLimit: 10
   progressDeadlineSeconds: 600
