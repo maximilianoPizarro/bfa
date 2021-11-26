@@ -1,0 +1,62 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nodo-bfa
+  labels:
+    app: nodo-bfa
+    app.kubernetes.io/component: nodo-bfa
+    app.kubernetes.io/instance: nodo-bfa
+    app.kubernetes.io/name: nodo-bfa
+    app.openshift.io/runtime: golang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodo-bfa
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodo-bfa
+        deploymentconfig: nodo-bfa
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      restartPolicy: Always
+      serviceAccountName: buildah-sa
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - name: nodo-bfa
+          image: >-
+            bfaar/nodo:test
+          ports:
+            - containerPort: 30303
+              protocol: TCP
+            - containerPort: 30303
+              protocol: UDP
+            - containerPort: 8545
+              protocol: TCP
+            - containerPort: 8546
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: nodo-bfa-1
+              mountPath: /HOME/BFA
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      serviceAccount: buildah-sa
+      volumes:
+        - name: nodo-bfa-1
+          persistentVolumeClaim:
+            claimName: pvc-bfa
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
