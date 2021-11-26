@@ -22,3 +22,22 @@ spec:
       importPolicy: {}
       referencePolicy:
         type: Local
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: nodo-bfa-toolbase
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: toolbase
+      annotations:
+        openshift.io/imported-from: 'bfaar/nodo:toolbase'
+      from:
+        kind: DockerImage
+        name: 'bfaar/nodo:toolbase'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Local
