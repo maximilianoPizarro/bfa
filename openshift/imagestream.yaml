@@ -1,0 +1,24 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: nodo-bfa
+  labels:
+    app: nodo-bfa
+    app.kubernetes.io/component: nodo-bfa
+    app.kubernetes.io/instance: nodo-bfa
+    app.kubernetes.io/name: nodo-bfa
+    app.kubernetes.io/part-of: nodo-bfa
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: test
+      annotations:
+        openshift.io/imported-from: 'bfaar/nodo:test'
+      from:
+        kind: DockerImage
+        name: 'bfaar/nodo:test'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Local
