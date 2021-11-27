@@ -2,6 +2,10 @@ FROM bfaar/nodo:test
 
 USER root
 
-RUN chown 1023000000:1023000000 -R /home/bfa
+RUN chgrp -R 0 /home/bfa && 
+    chmod -R g=u /home/bfa
 
-USER 1023000000
+#RUN chown 1023000000:1023000000 -R /home/bfa
+
+#USER 1023000000
+USER 1001
