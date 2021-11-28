@@ -1,7 +1,7 @@
 FROM            ethereum/solc:0.6.3-alpine AS solc
 FROM		ethereum/client-go:alltools-v1.9.11
 LABEL		maintainer="Robert Martin-Legene <robert@nic.ar>"
-CMD		[ "/bin/bash" ]
+ENTRYPOINT	[ "/bin/bash" ]
 COPY		--from=solc /usr/local/bin/solc /usr/local/bin
 EXPOSE          8545 8546 30303
 ENV		USERNAME=bfa HOME=/home/bfa BFAHOME=/home/bfa/bfa BFANETWORKIDPROD=47525974938 BFANETWORKIDTEST=55555000000 VIRTUALIZATION=DOCKER BFANETWORKDIRPROD=/home/bfa/bfa/network BFANETWORKDIRTEST=/home/bfa/bfa/test2network PATH=/home/bfa/bfa/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
