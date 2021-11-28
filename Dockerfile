@@ -8,7 +8,7 @@ ENV		USERNAME=bfa HOME=/home/bfa BFAHOME=/home/bfa/bfa BFANETWORKIDPROD=47525974
 RUN		adduser -u 30303 -s /bin/bash -h ${HOME} -D ${USERNAME} ${USERNAME} && apk add --no-cache git bash jq perl perl-class-accessor perl-json perl-json-xs perl-lwp-protocol-https nodejs npm binutils python python3 curl make g++ && find /var/cache/apk -type f -delete
 USER		${USERNAME}
 WORKDIR 	${HOME}
-RUN		git clone --quiet https://gitlab.bfa.ar/blockchain/nucleo.git ${BFAHOME} && cd ${BFAHOME} && npm update && npm audit fix
+RUN		git clone --quiet https://gitlab.bfa.ar/blockchain/nucleo.git bfa && cd ${BFAHOME} && npm update && npm audit fix
 #CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
 ENTRYPOINT [ "/home/bfa/bfa/bin/singlestart" ]
 USER root
