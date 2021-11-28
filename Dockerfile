@@ -8,7 +8,7 @@ ENV             BFAHOME=${HOME}/bfa BFANETWORKIDPROD=47525974938 BFANETWORKIDTES
 ENV             BFANETWORKDIRPROD=${BFAHOME}/network BFANETWORKDIRTEST=${BFAHOME}/test2network PATH=${BFAHOME}/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV     	BFANETWORKID=__BFANETWORKID__ BFANETWORKDIR=__BFANETWORKDIR__ GITBRANCH=__GITBRANCH__
 ENV		BFANODEDIR=${BFANETWORKDIR}/node BFATOML=${BFANETWORKDIR}/config.toml
-RUN             mkdir ${BFANODEDIR} && ln -s ${BFANODEDIR} ${HOME}/.ethereum
+#RUN             mkdir ${BFANODEDIR} && ln -s ${BFANODEDIR} ${HOME}/.ethereum
 USER		${USERNAME}
 WORKDIR 	${BFAHOME}
 RUN		git checkout package-lock.json ; git checkout ${GITBRANCH} && git pull
