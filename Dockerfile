@@ -11,10 +11,10 @@ ENV		BFANODEDIR=${BFANETWORKDIR}/node BFATOML=${BFANETWORKDIR}/config.toml
 #RUN             mkdir ${BFANODEDIR} && ln -s ${BFANODEDIR} ${HOME}/.ethereum
 USER		${USERNAME}
 WORKDIR 	${BFAHOME}
-RUN		git checkout package-lock.json ; git checkout ${GITBRANCH} && git pull
-VOLUME          $BFANETWORKDIR/cache
-VOLUME          $BFANODEDIR
+#RUN		git checkout package-lock.json ; git checkout ${GITBRANCH} && git pull
+#VOLUME          $BFANETWORKDIR/cache
+#VOLUME          $BFANODEDIR
 
-RUN chown 1023000000:1023000000 -R /home/bfa
+RUN chown 1023000000:1023000000 -R ${BFAHOME}
 
 USER 1023000000
