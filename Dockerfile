@@ -8,7 +8,9 @@ USER root
 
 ADD entrypoint.sh /entrypoint.sh
 
-RUN source ./entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+RUN source /entrypoint.sh
 
 #USER 1023000000
 RUN chmod -R u+x /home/bfa
