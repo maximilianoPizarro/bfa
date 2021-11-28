@@ -24,5 +24,5 @@ RUN chgrp -R 0 /home/bfa
 
 RUN chmod -R g=u /home/bfa /etc/passwd
 
-ENTRYPOINT [ "entrypoint" ]
-USER 1001
+#ENTRYPOINT [ "entrypoint" ]
+USER 1023000000
