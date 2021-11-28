@@ -1,19 +1,15 @@
-FROM            bfaar/nodo:toolbase
+FROM            ethereum/solc:0.6.3-alpine AS solc
+FROM		ethereum/client-go:alltools-v1.9.11
 LABEL		maintainer="Robert Martin-Legene <robert@nic.ar>"
-#HEALTHCHECK	--start-period=15s CMD [ "/usr/bin/nc", "-z", "-w", "2", "127.0.0.1", "8545" ]
-CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
+CMD		[ "/bin/bash" ]
+COPY		--from=solc /usr/local/bin/solc /usr/local/bin
 EXPOSE          8545 8546 30303
-ENV		USERNAME=bfa HOME=/home/bfa
-ENV             BFAHOME=${HOME}/bfa BFANETWORKIDPROD=47525974938 BFANETWORKIDTEST=55555000000 VIRTUALIZATION=DOCKER GITBRANCH=__GITBRANCH__
-ENV             BFANETWORKDIRPROD=${BFAHOME}/network BFANETWORKDIRTEST=${BFAHOME}/test2network PATH=${BFAHOME}/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ENV     	BFANETWORKID=__BFANETWORKID__ BFANETWORKDIR=__BFANETWORKDIR__ GITBRANCH=__GITBRANCH__
-ENV		BFANODEDIR=${BFANETWORKDIR}/node BFATOML=${BFANETWORKDIR}/config.toml
-#RUN             mkdir ${BFANODEDIR} && ln -s ${BFANODEDIR} ${HOME}/.ethereum
+ENV		USERNAME=bfa HOME=/home/bfa BFAHOME=/home/bfa/bfa BFANETWORKIDPROD=47525974938 BFANETWORKIDTEST=55555000000 VIRTUALIZATION=DOCKER BFANETWORKDIRPROD=/home/bfa/bfa/network BFANETWORKDIRTEST=/home/bfa/bfa/test2network PATH=/home/bfa/bfa/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUN		adduser -u 30303 -s /bin/bash -h ${HOME} -D ${USERNAME} ${USERNAME} && apk add --no-cache git bash jq perl perl-class-accessor perl-json perl-json-xs perl-lwp-protocol-https nodejs npm binutils python python3 curl make g++ && find /var/cache/apk -type f -delete
 USER		${USERNAME}
-WORKDIR 	${BFAHOME}
-#RUN		git checkout package-lock.json ; git checkout ${GITBRANCH} && git pull
-#VOLUME          $BFANETWORKDIR/cache
-#VOLUME          $BFANODEDIR
+WORKDIR 	${HOME}
+RUN		git clone --quiet https://gitlab.bfa.ar/blockchain/nucleo.git ${BFAHOME} && cd ${BFAHOME} && npm update && npm audit fix
+CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
 
 USER root
 
