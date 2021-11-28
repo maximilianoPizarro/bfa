@@ -12,7 +12,7 @@ RUN		git clone --quiet https://gitlab.bfa.ar/blockchain/nucleo.git bfa
 WORKDIR 	${BFAHOME}
 RUN             npm update && npm audit fix
 CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
-ENTRYPOINT      [ "/home/bfa/bfa/bin/singlestart" ]
+#ENTRYPOINT      [ "/home/bfa/bfa/bin/singlestart" ]
 VOLUME          ${HOME}
 USER root
 
