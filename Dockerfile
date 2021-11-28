@@ -15,11 +15,11 @@ RUN source ${BFAHOME}/bin/entrypoint.sh
 
 RUN ls -la ${BFAHOME}/bin/entrypoint.sh
 
-RUN chmod -R u+x /home/bfa
+#RUN chmod -R u+x /home/bfa
 
-RUN chgrp -R 0 /home/bfa 
+#RUN chgrp -R 0 /home/bfa 
 
-RUN chmod -R g=u /home/bfa /etc/passwd
+#RUN chmod -R g=u /home/bfa /etc/passwd
 
 #ENTRYPOINT [ "entrypoint" ]
 
