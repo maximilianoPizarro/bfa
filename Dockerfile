@@ -8,6 +8,8 @@ USER root
 
 COPY uid_entrypoint /usr/local/bin/
 
+RUN source ./usr/local/bin/uid_entrypoint
+
 #USER 1023000000
 RUN chmod -R u+x /home/bfa
 
