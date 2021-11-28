@@ -3,7 +3,7 @@ FROM bfaar/nodo:test
 USER root
 #https://github.com/RHsyseng/container-rhel-examples/tree/master/starter-arbitrary-uid
 
-ADD entrypoint.sh ${BFAHOME}/bin/entrypoint_uid.sh
+#ADD entrypoint.sh ${BFAHOME}/bin/entrypoint_uid.sh
 
 #RUN chmod +x ${BFAHOME}/bin/entrypoint_uid.sh
 
@@ -20,4 +20,5 @@ ADD entrypoint.sh ${BFAHOME}/bin/entrypoint_uid.sh
 #ENTRYPOINT [ "entrypoint" ]
 
 RUN chown 1023000000:1023000000 -R /home/bfa
+
 USER 1023000000
