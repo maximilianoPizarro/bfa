@@ -5,7 +5,7 @@ USER root
 
 ADD entrypoint.sh ${BFAHOME}/bin/entrypoint_uid.sh
 
-RUN chmod +x ${BFAHOME}/bin/entrypoint_uid.sh
+#RUN chmod +x ${BFAHOME}/bin/entrypoint_uid.sh
 
 #RUN source ${BFAHOME}/bin/entrypoint.sh
 
