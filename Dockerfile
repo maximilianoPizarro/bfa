@@ -1,19 +1,15 @@
 FROM bfaar/nodo:test
 
-USER bfa
+USER root
 #https://github.com/RHsyseng/container-rhel-examples/tree/master/starter-arbitrary-uid
 
-ADD entrypoint.sh ${BFAHOME}/bin/entrypoint.sh
+ADD entrypoint.sh ${BFAHOME}/bin/entrypoint_uid.sh
 
-RUN pwd
+RUN chmod +x ${BFAHOME}/bin/entrypoint_uid.sh
 
-USER 0
+#RUN source ${BFAHOME}/bin/entrypoint.sh
 
-RUN chmod +x ${BFAHOME}/bin/entrypoint.sh
-
-RUN source ${BFAHOME}/bin/entrypoint.sh
-
-RUN ls -la ${BFAHOME}/bin/entrypoint.sh
+#RUN ls -la ${BFAHOME}/bin/entrypoint.sh
 
 #RUN chmod -R u+x /home/bfa
 
