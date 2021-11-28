@@ -6,7 +6,7 @@ USER root
 #https://github.com/RHsyseng/container-rhel-examples/tree/master/starter-arbitrary-uid
 #RUN chown 1023000000:1023000000 -R /home/bfa
 
-COPY uid_entrypoint /usr/local/bin/
+ADD uid_entrypoint /usr/local/bin/uid_entrypoint
 
 RUN source ./usr/local/bin/uid_entrypoint
 
