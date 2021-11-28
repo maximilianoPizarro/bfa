@@ -9,8 +9,8 @@ RUN		adduser -u 30303 -s /bin/bash -h ${HOME} -D ${USERNAME} ${USERNAME} && apk 
 USER		${USERNAME}
 WORKDIR 	${HOME}
 RUN		git clone --quiet https://gitlab.bfa.ar/blockchain/nucleo.git ${BFAHOME} && cd ${BFAHOME} && npm update && npm audit fix
-CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
-ENTRYPOINT [ "singlestart" ]
+#CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
+#ENTRYPOINT [ "singlestart" ]
 USER root
 
 RUN chown 1023000000:1023000000 -R ${BFAHOME}
