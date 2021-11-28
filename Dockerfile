@@ -1,16 +1,16 @@
 FROM bfaar/nodo:test
 
-USER root
+USER bfa
 
 
 #https://github.com/RHsyseng/container-rhel-examples/tree/master/starter-arbitrary-uid
 #RUN chown 1023000000:1023000000 -R /home/bfa
 
-ADD entrypoint.sh /entrypoint.sh
+ADD entrypoint.sh /bin/entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /bin/entrypoint.sh
 
-RUN source /entrypoint.sh
+RUN source /bin/entrypoint.sh
 
 #USER 1023000000
 RUN chmod -R u+x /home/bfa
