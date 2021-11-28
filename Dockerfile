@@ -6,9 +6,9 @@ USER root
 #https://github.com/RHsyseng/container-rhel-examples/tree/master/starter-arbitrary-uid
 #RUN chown 1023000000:1023000000 -R /home/bfa
 
-ADD uid_entrypoint /usr/local/bin/uid_entrypoint
+ADD uid_entrypoint.sh /usr/local/bin/uid_entrypoint.sh
 
-RUN source ./usr/local/bin/uid_entrypoint
+RUN source ./usr/local/bin/uid_entrypoint.sh
 
 #USER 1023000000
 RUN chmod -R u+x /home/bfa
