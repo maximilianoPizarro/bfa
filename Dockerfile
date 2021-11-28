@@ -6,13 +6,18 @@ USER bfa
 #https://github.com/RHsyseng/container-rhel-examples/tree/master/starter-arbitrary-uid
 #RUN chown 1023000000:1023000000 -R /home/bfa
 
-ADD entrypoint.sh /bin/entrypoint.sh
+ADD entrypoint.sh ${BFAHOME}/bin/entrypoint.sh
 
-RUN chmod +x /bin/entrypoint.sh
+RUN pwd
 
-RUN source /bin/entrypoint.sh
+USER 0
 
-#USER 1023000000
+RUN chmod +x ${BFAHOME}/bin/entrypoint.sh
+
+RUN source ${BFAHOME}/bin/entrypoint.sh
+
+RUN ls -la ${BFAHOME}/bin/entrypoint.sh
+
 RUN chmod -R u+x /home/bfa
 
 RUN chgrp -R 0 /home/bfa 
