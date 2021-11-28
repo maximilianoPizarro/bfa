@@ -10,7 +10,7 @@ USER		${USERNAME}
 WORKDIR 	${HOME}
 RUN		git clone --quiet https://gitlab.bfa.ar/blockchain/nucleo.git ${BFAHOME} && cd ${BFAHOME} && npm update && npm audit fix
 #CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
-#ENTRYPOINT [ "singlestart" ]
+ENTRYPOINT [ "/home/bfa/bfa/bin/singlestart" ]
 USER root
 
 RUN chown 1023000000:1023000000 -R ${BFAHOME}
