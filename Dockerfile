@@ -8,11 +8,11 @@ USER root
 ADD uid_entrypoint /uid_entrypoint
 
 #USER 1023000000
-RUN chmod -R u+x /home/bfa
+#RUN chmod -R u+x /home/bfa
 
-RUN chgrp -R 0 /home/bfa 
+#RUN chgrp -R 0 /home/bfa 
 
-RUN chmod -R g=u /home/bfa /etc/passwd
+#RUN chmod -R g=u /home/bfa /etc/passwd
 
 ENTRYPOINT [ "uid_entrypoint" ]
 USER 1001
