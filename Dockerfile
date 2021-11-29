@@ -6,6 +6,8 @@ RUN chgrp -R 0 ${HOME} && chmod -R g=u ${HOME}
 
 RUN chgrp -R 0 ${BFANODEDIR} && chmod -R g=u ${BFANODEDIR}
 
+RUN mkdir ${BFANODEDIR}/keystore
+
 RUN chgrp -R 0 ${BFANODEDIR}/keystore && chmod -R g=u ${BFANODEDIR}/keystore
 
 #RUN chown 1023000000:1023000000 -R ${HOME}
