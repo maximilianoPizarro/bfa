@@ -41,3 +41,23 @@ spec:
       importPolicy: {}
       referencePolicy:
         type: Local
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: client-go
+  namespace: mpizarro-dev
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: alltools-v1.9.11
+      annotations:
+        openshift.io/imported-from: 'ethereum/client-go:alltools-v1.9.11'
+      from:
+        kind: DockerImage
+        name: 'ethereum/client-go:alltools-v1.9.11'
+      generation: 4
+      importPolicy: {}
+      referencePolicy:
+        type: Local
