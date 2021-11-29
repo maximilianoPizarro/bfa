@@ -4,11 +4,13 @@ USER root
 
 RUN chgrp -R 0 ${HOME} && chmod -R g=u ${HOME}
 
+RUN chgrp -R 0 ${BFAHOME} && chmod -R g=u ${BFAHOME}
+
+RUN chgrp -R 0 ${BFANETWORKDIRTEST} && chmod -R g=u ${BFANETWORKDIRTEST}
+
+RUN chgrp -R 0 ${BFANETWORKDIR} && chmod -R g=u ${BFANETWORKDIR}
+
 RUN chgrp -R 0 ${BFANODEDIR} && chmod -R g=u ${BFANODEDIR}
-
-RUN mkdir ${BFANODEDIR}/keystore
-
-RUN chgrp -R 0 ${BFANODEDIR}/keystore && chmod -R g=u ${BFANODEDIR}/keystore
 
 #RUN chown 1023000000:1023000000 -R ${HOME}
 
