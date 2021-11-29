@@ -20,7 +20,7 @@ RUN             npm update && npm audit fix
 
 VOLUME          ${HOME}
 VOLUME          $BFANETWORKDIR/cache
-VOLUME          $BFANODEDIR
+VOLUME          $BFANODEDIR/keystore
 
 EXPOSE          8545 8546 30303
 
@@ -30,9 +30,5 @@ ENTRYPOINT	[ "/bin/bash" ]
 USER root
 
 RUN chown 1023000000:1023000000 -R ${HOME}
-
-RUN chown 1023000000:1023000000 -R ${BFANODEDIR}
-
-RUN chown 1023000000:1023000000 -R $BFANETWORKDIR/cache
 
 USER 1023000000
