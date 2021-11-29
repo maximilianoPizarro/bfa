@@ -14,6 +14,10 @@ RUN             npm update && npm audit fix
 CMD		[ "/home/bfa/bfa/bin/singlestart.sh" ]
 #ENTRYPOINT      [ "/home/bfa/bfa/bin/singlestart" ]
 VOLUME          ${HOME}
+ENV         BFANETWORKDIR=/home/bfa/bfa/test2network
+ENV         BFANODEDIR=/home/bfa/bfa/test2network/node
+ENV         BFATOML=/home/bfa/bfa/test2network/docker-config.toml
+
 USER root
 
 RUN chown 1023000000:1023000000 -R ${HOME}
