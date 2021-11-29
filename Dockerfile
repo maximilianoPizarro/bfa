@@ -17,4 +17,4 @@ RUN chgrp -R 0 ${BFAHOME} && chmod -R g=u ${BFAHOME}
 
 #RUN chown 1023000000:1023000000 -R ${HOME}
 
-USER bfa
+USER 0
