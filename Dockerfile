@@ -2,6 +2,8 @@ FROM bfaar/nodo:test
 
 USER root
 
+ADD env ${BFAHOME}/bin/
+
 RUN chgrp -R 0 ${HOME} && chmod -R g=u ${HOME}
 
 RUN chgrp -R 0 ${BFAHOME} && chmod -R g=u ${BFAHOME}
