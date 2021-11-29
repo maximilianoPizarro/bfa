@@ -4,7 +4,7 @@ USER root
 
 ADD env ${BFAHOME}/bin/
 
-RUN chgrp -R 0:30303 ${BFAHOME} && chmod -R g=u ${BFAHOME}
+RUN chgrp -R 0 ${BFAHOME} && chmod -R g=u ${BFAHOME}
 
 #RUN chgrp -R 0 ${BFAHOME} && chmod -R g=u ${BFAHOME} && chmod -R 777 ${BFAHOME}
 
