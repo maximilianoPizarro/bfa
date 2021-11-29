@@ -1,6 +1,6 @@
 FROM            ethereum/solc:0.6.3-alpine AS solc
 FROM		ethereum/client-go:alltools-v1.9.11
-LABEL		maintainer="Robert Martin-Legene <robert@nic.ar>"
+LABEL		maintainer="Robert Martin-Legene <robert@nic.ar>, Maximiliano Pizarro <maximiliano.pizarro.5@gmail.com>"
 
 COPY		--from=solc /usr/local/bin/solc /usr/local/bin
 
