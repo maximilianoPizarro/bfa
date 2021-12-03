@@ -1,13 +1,16 @@
 # Nucleo BFA para Kubernetes
 
-El propósito del proyecto es extender la el proyecto nodo del siguiente repositorio base [bfa](https://gitlab.bfa.ar/docker/bfanodo) a las plataformas de contenedores. 
-
-Verificado en Sandbox RedHat OpenShift Dedicated (Openshift 4.9) sincronizando con la red de pruebas testnet. <img src="https://img.shields.io/badge/redhat-CC0000?style=for-the-badge&logo=redhat&logoColor=white" alt="Redhat">
-
-
 <p align="left">
-  <img src="https://raw.githubusercontent.com/maximilianoPizarro/bfa/main/RedHatOpenShiftDedicated.PNG?token=ADJYHOJXSJHR5SOHJW4AQSLBVIW2Y" width="800" title="hover text">
+  <img src="https://raw.githubusercontent.com/maximilianoPizarro/bfa/main/RedHatOpenShiftDedicated.PNG?token=ADJYHOPHBCEVG6K4EHPBCW3BVIZSS" width="800" title="hover text">
 </p>  
+
+
+El propósito de este proyecto es extender el repositorio base [bfa](https://gitlab.bfa.ar/docker/bfanodo) a las plataformas de contenedores. 
+
+
+<img src="https://img.shields.io/badge/redhat-CC0000?style=for-the-badge&logo=redhat&logoColor=white" alt="Redhat">
+
+Verificado en Sandbox RedHat OpenShift Dedicated (Openshift 4.9) sincronizando con la red de pruebas testnet. 
 
 
 ## Installation
@@ -19,7 +22,7 @@ kubectl apply -f k8s/ .
 ```
 ## Dockerfile
 
-Existen dos tipos de dockerfile en el repositorio, el que toma de base la imagen del nodo en testnet y el que toma de base el cliente Ethereum clona el núcleo bfa y genera el build.
+Existen dos tipos de dockerfile en el repositorio, el que toma de base la imagen del nodo en testnet y el que toma de base el cliente Ethereum clona el núcleo bfa y genera la instalación.
 
 ```bash
 docker build -t nodo-bfa .
@@ -89,10 +92,9 @@ spec:
 
 ```
 
-## Crear Volumen Persistente
+## Volumen Persistente
 
-el pvc se genera en el import de /k8s, tengan en cuenta el storage segun 
-los requerimientos del tipo de nodo gateway a desplegar 300Gi minimo.
+Es necesario percisir la cadena en un volumen persistente, el pvc se genera en el import de /k8s, tengan en cuenta el storage segun los requerimientos del tipo de nodo gateway a desplegar 300Gi minimo y en ascenso.
 
 ```python
 
@@ -113,6 +115,7 @@ spec:
 ```
 
 ## ConfigMap
+
 se creará el configmap docker-config  y se montará como volumen, principal atención a esta sección del DeploymentConfig, existe tambien un .env en donde se pueden sobreescribir las variables de entorno y cambiar de testnet a produccion por ejemplo
 ```python
 # k8s/deploymentconfig.yaml
@@ -129,9 +132,7 @@ volumeMounts:
 
 ## Generar SCC usuario (solo si no buildea el Dockerfile)
 
-El user por defecto de la imagen base del nodo corresponde al 1001, para generar un contexto de id arbitrario
-se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores
-de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html)
+El user por defecto de la imagen base del nodo corresponde al 30303, para generar un contexto de id arbitrario se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html)
 
 ```python
 # requiere permisos cluster-admin
@@ -142,4 +143,10 @@ de la [documentación oficial de redhat](https://docs.openshift.com/container-pl
 
 ## Contribucion
 
-[bfa](https://bfa.ar/)
+
+🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭
+
+|---------------------------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
+| 🔭 More info bfa.ar	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a> 	|
+| 📫 How to reach me:              	| <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin">      	|
+
