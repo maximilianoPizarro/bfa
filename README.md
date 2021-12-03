@@ -1,10 +1,18 @@
-# Nodo BFA para Kubernetes
+# Nucleo BFA para Kubernetes
 
-El propósito del proyecto es extender la el proyecto nodo del siguiente repositorio base [bfa](https://gitlab.bfa.ar/docker/bfanodo) a las plataformas de contenedores, verificado en el Sandbox Openshift Dedicado 4.9.
+El propósito del proyecto es extender la el proyecto nodo del siguiente repositorio base [bfa](https://gitlab.bfa.ar/docker/bfanodo) a las plataformas de contenedores. 
+
+Verificado en Sandbox RedHat OpenShift Dedicated (Openshift 4.9) sincronizando con la red de pruebas testnet. <img src="https://img.shields.io/badge/redhat-CC0000?style=for-the-badge&logo=redhat&logoColor=white" alt="Redhat">
+
+
+<p align="left">
+  <img src="https://raw.githubusercontent.com/maximilianoPizarro/bfa/main/RedHatOpenShiftDedicated.PNG?token=ADJYHOJXSJHR5SOHJW4AQSLBVIW2Y" width="800" title="hover text">
+</p>  
+
 
 ## Installation
 
-Logear con el cliente de la plataforma del cluster, clonar el repositorio e importar todos los objetos k8s en el namespace.
+Logear con el cliente del cluster, clonar el repositorio e importar todos los objetos k8s en el namespace.
 
 ```bash
 kubectl apply -f k8s/ .
@@ -19,9 +27,12 @@ docker build -t nodo-bfa .
 
 ## BuildConfig
 
-Se deberán generar secret y webhook(opcional) para clonar el repositorio en caso de necesitar hacer un fork.
+Para la implementacion de CI/CD a partir de este repositorio se deberán generar secret y webhook(opcional) para clonar el repositorio en caso de necesitar hacer un fork.
 
 ```bash
+
+# k8s/secret.yaml
+
 kind: Secret
 apiVersion: v1
 metadata:
@@ -30,6 +41,8 @@ data:
   password: maximilianoPizarro
   username: token
 type: kubernetes.io/basic-auth
+
+# k8s/secret.yaml
 
 kind: Secret
 apiVersion: v1
@@ -43,9 +56,12 @@ type: Opaque
 
 ## ImageStream
 
-Por lo menos debe existir la imagen nodo-bfa, recomiendo descargar a registry internal por el limite de descargas de dockerhub.
+Por lo menos debe existir la imagen nodo-bfa, recomiendo descargar 
+a registry internal por el limite de descargas de dockerhub.
 
 ```bash
+# k8s/imagestream.yaml
+
 kind: ImageStream
 apiVersion: image.openshift.io/v1
 metadata:
@@ -75,8 +91,12 @@ spec:
 
 ## Crear Volumen Persistente
 
+el pvc se genera en el import de /k8s, tengan en cuenta el storage segun 
+los requerimientos del tipo de nodo gateway a desplegar 300Gi minimo.
+
 ```python
-# el pvc se genero en el paso anterior, tengan en cuenta el storage segun los requerimientos del tipo de nodo a desplegar
+
+# k8s/pvc.yaml
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -93,9 +113,9 @@ spec:
 ```
 
 ## ConfigMap
-
+se creará el configmap docker-config  y se montará como volumen, principal atención a esta sección del DeploymentConfig, existe tambien un .env en donde se pueden sobreescribir las variables de entorno y cambiar de testnet a produccion por ejemplo
 ```python
-# se creará el configmap docker-config  y se montará como volumen, principal atención a esta sección del DeploymentConfig, existe tambien un .env en donde se pueden sobreescribir las variables de entorno y cambiar de testnet a produccion por ejemplo.
+# k8s/deploymentconfig.yaml
 
 volumeMounts:
   - name: nodo-bfa-1
@@ -109,10 +129,14 @@ volumeMounts:
 
 ## Generar SCC usuario (solo si no buildea el Dockerfile)
 
+El user por defecto de la imagen base del nodo corresponde al 1001, para generar un contexto de id arbitrario
+se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores
+de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html)
+
 ```python
 # requiere permisos cluster-admin
 
- oc adm policy add-scc-to-user 30303 system:serviceaccount:namespace:default
+ oc adm policy add-scc-to-user 30303 system:serviceaccount:$NAMESPACE:default
 
 ```
 
