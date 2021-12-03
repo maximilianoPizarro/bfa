@@ -1,10 +1,5 @@
 # Nucleo BFA para Kubernetes
 
-<p align="left">
-  <img src="https://raw.githubusercontent.com/maximilianoPizarro/bfa/main/RedHatOpenShiftDedicated.PNG?token=ADJYHOPHBCEVG6K4EHPBCW3BVIZSS" width="800" title="hover text">
-</p>  
-
-
 El propósito de este proyecto es extender el repositorio base [bfa](https://gitlab.bfa.ar/docker/bfanodo) a las plataformas de contenedores. 
 
 
@@ -12,6 +7,9 @@ El propósito de este proyecto es extender el repositorio base [bfa](https://git
 
 Verificado en Sandbox RedHat OpenShift Dedicated (Openshift 4.9) sincronizando con la red de pruebas testnet. 
 
+<p align="left">
+  <img src="https://drive.google.com/file/d/1sq9GXlpG-Q_73pFrb-u35EIZYfrft_GV/view?usp=sharing" width="800" title="hover text">
+</p>  
 
 ## Installation
 
@@ -130,7 +128,7 @@ volumeMounts:
 
 ```
 
-## Generar SCC usuario (solo si no buildea el Dockerfile)
+## Security Context Contraint (solo si no buildea el Dockerfile)
 
 El user por defecto de la imagen base del nodo corresponde al 30303, para generar un contexto de id arbitrario se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html)
 
@@ -144,9 +142,8 @@ El user por defecto de la imagen base del nodo corresponde al 30303, para genera
 ## Contribucion
 
 
-🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭🔭
-
+| 🔭 More info bfa.ar     	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
 |---------------------------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| 🔭 More info bfa.ar	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a> 	|
-| 📫 How to reach me:              	| <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin">      	|
+| 📫 How to reach me:   	| <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin">  	|
+|            	|       	|
 
