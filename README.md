@@ -1,4 +1,4 @@
-# Nodo Gateway Blockchain Federal Argentina para Kubernetes
+# Nodo Gateway Blockchain Federal Argentina para Kubernetes 
 <p align="left">
 <img src="https://img.shields.io/badge/redhat-CC0000?style=for-the-badge&logo=redhat&logoColor=white" alt="Redhat">
 <img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white" alt="kubernetes">
@@ -6,9 +6,9 @@
 <img src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="shell">  
 </p>
 
-El propósito de este proyecto consiste en generar los objetos kubernetes en base a la imagen del nodo en la red de testnet del repositorio oficial [bfanodo](https://gitlab.bfa.ar/docker/bfanodo) para el despliegue en las plataformas de contenedores.
+El propósito de este proyecto consiste en generar los objetos kubernetes en base a la imagen del nodo del repositorio oficial [bfanodo](https://gitlab.bfa.ar/docker/bfanodo) para el despliegue sobre las plataformas de contenedores.
 
-Verificado en [Sandbox RedHat OpenShift Dedicated](https://developers.redhat.com/developer-sandbox) (Openshift 4.9) sincronizando con la red de pruebas testnet. 
+En este caso se verifico el funcionamiento en [Sandbox RedHat OpenShift Dedicated](https://developers.redhat.com/developer-sandbox) (Openshift 4.9) sincronizando con la red de pruebas testnet. 
 
 <p align="left">
   <img src="https://drive.google.com/u/0/uc?id=1sq9GXlpG-Q_73pFrb-u35EIZYfrft_GV&export=download" width="800" title="hover text">
@@ -16,7 +16,7 @@ Verificado en [Sandbox RedHat OpenShift Dedicated](https://developers.redhat.com
 
 ## Instalación
 
-Autenticacar con el cliente del cluster, clonar el repositorio e importar todos los objetos k8s en el namespace.
+Autenticacar con el cliente del cluster, clonar el repositorio e importar todos los objetos k8s en el namespace donde se creará el proyecto.
 
 ```bash
 kubectl apply -f k8s/ . -n $NAMESPACE
@@ -98,7 +98,7 @@ spec:
 
 ## Volumen Persistente
 
-Es necesario persistir la blockchain, sin importar la red a la que se sincronize, por medio de un volumen persistente, el pvc se genera en el import de /k8s, tengan en cuenta el storage segun los requerimientos del tipo de nodo gateway a desplegar es de 300Gi minimo (15Gi en sandbox) y en crecimiento continuo.
+Es necesario persistir la blockchain, sin importar la red a la que se sincronize, por medio de un volumen persistente, el pvc se genera en el import de /k8s, tengan en cuenta el storage segun los requerimientos del tipo de nodo gateway a desplegar es de 300Gi minimo (15Gi es el limite maximo en el cluster sandbox) y en crecimiento continuo.
 
 ```python
 
@@ -120,7 +120,7 @@ spec:
 
 ## ConfigMap
 
-Con kubectl apply se crearán los configmap docker-config y env y se montarán como volumen.
+Con *kubectl apply* se crearán los configmap docker-config y env, se montarán en DeploymentConfig como volumen.
 ```python
 # k8s/deploymentconfig.yaml
 
@@ -137,7 +137,7 @@ volumeMounts:
 
 ## Secret y WebHook (opcional)
 
-Para la implementacion de CI/CD a partir los eventos del repositorio se deberán generar secret y webhook) para clonar el repositorio en caso de necesitar hacer un fork.
+Para la implementacion de CI/CD a partir los eventos de repositorios se deberán generar secret y webhook) para clonar el repositorio en caso de necesitar hacer un fork.
 
 ```bash
 
@@ -177,6 +177,8 @@ El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para 
 ```
 
 ## Acerca de 
+
+Cada transacción sobre la es stampada sobre plataforma Blockchain Federal Argentina en una fecha cierta por medio de nodos transaccionales registrados en bfa.ar a través de un Smart Contract llamado TIME STAMP AUTHORITY que se encuentra desplegado en la red de pares de nodos de Clientes Ethereum con dos únicas operaciones disponibles get y put del digesto criptográfico. El sello de tiempo es un servicio de la plataforma en donde cualquier usuario registrado o no puede consultar si el hash de un documento existe en la cadena de bloques informando fecha cierta, autoría y bloque de la transacción. Conoce más ingresando a página #BlockchainFederalArgentina #Sumate #TransformaciónDigital
 
 | 🔭 Red BFA    	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
 |---------------------------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
