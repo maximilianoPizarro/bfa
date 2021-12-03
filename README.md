@@ -98,7 +98,7 @@ spec:
 
 ## Volumen Persistente
 
-Es necesario persistir la cadena de blockchain sin importar la red a la que se sincronize por medio de un volumen persistente, el pvc se genera en el import de /k8s, tengan en cuenta el storage segun los requerimientos del tipo de nodo gateway a desplegar es de 300Gi minimo y en crecimiento continuo.
+Es necesario persistir la blockchain, sin importar la red a la que se sincronize, por medio de un volumen persistente, el pvc se genera en el import de /k8s, tengan en cuenta el storage segun los requerimientos del tipo de nodo gateway a desplegar es de 300Gi minimo (15Gi en sandbox) y en crecimiento continuo.
 
 ```python
 
@@ -137,7 +137,7 @@ volumeMounts:
 
 ## Secret y WebHook (opcional)
 
-Para la implementacion de CI/CD a partir de este repositorio se deberán generar secret y webhook(opcional) para clonar el repositorio en caso de necesitar hacer un fork.
+Para la implementacion de CI/CD a partir los eventos del repositorio se deberán generar secret y webhook) para clonar el repositorio en caso de necesitar hacer un fork.
 
 ```bash
 
@@ -176,8 +176,7 @@ El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para 
 
 ```
 
-## Contacto
-
+## Acerca de 
 
 | 🔭 Red BFA    	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
 |---------------------------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
