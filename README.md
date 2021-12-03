@@ -8,7 +8,7 @@ El propósito de este proyecto es extender el repositorio base [bfa](https://git
 Verificado en Sandbox RedHat OpenShift Dedicated (Openshift 4.9) sincronizando con la red de pruebas testnet. 
 
 <p align="left">
-  <img src="https://drive.google.com/file/d/1sq9GXlpG-Q_73pFrb-u35EIZYfrft_GV/view?usp=sharing" width="800" title="hover text">
+  <img src="https://drive.google.com/u/0/uc?id=1sq9GXlpG-Q_73pFrb-u35EIZYfrft_GV&export=download" width="800" title="hover text">
 </p>  
 
 ## Installation
