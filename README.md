@@ -1,10 +1,11 @@
-# Nodo Gateway BFA para Kubernetes
+# Nodo Gateway Blockchain Federal Argentina para Kubernetes
 <p align="left">
 <img src="https://img.shields.io/badge/redhat-CC0000?style=for-the-badge&logo=redhat&logoColor=white" alt="Redhat">
 <img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white" alt="kubernetes">
 <img src="https://img.shields.io/badge/docker-0db7ed?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
 <img src="https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="shell">  
 </p>
+
 El propósito de este proyecto consiste en generar los objetos kubernetes en base a la imagen del nodo en la red de testnet del repositorio oficial [bfanodo](https://gitlab.bfa.ar/docker/bfanodo) para el despliegue en las plataformas de contenedores.
 
 Verificado en [Sandbox RedHat OpenShift Dedicated](https://developers.redhat.com/developer-sandbox) (Openshift 4.9) sincronizando con la red de pruebas testnet. 
@@ -58,35 +59,6 @@ spec:
     contextDir: "bfatoolbase"  
     dockerfile: "FROM bfaar/nodo:test \nUSER root \nRUN chown 30303:0 ${BFAHOME} && chgrp -R 0 ${BFAHOME} && chmod -R g=u ${BFAHOME} \nUSER bfa"
   runPolicy: Serial 
-```
-
-## Secret y WebHook (opcional)
-
-Para la implementacion de CI/CD a partir de este repositorio se deberán generar secret y webhook(opcional) para clonar el repositorio en caso de necesitar hacer un fork.
-
-```bash
-
-# k8s/secret.yaml
-
-kind: Secret
-apiVersion: v1
-metadata:
-  name: gittoken
-data:
-  password: maximilianoPizarro
-  username: token
-type: kubernetes.io/basic-auth
-
-# k8s/secret.yaml
-
-kind: Secret
-apiVersion: v1
-metadata:
-  name: hookbfa
-data:
-  WebHookSecretKey: hooksecret
-type: Opaque
-
 ```
 
 ## ImageStream
@@ -162,6 +134,37 @@ volumeMounts:
 
 ```
 
+
+## Secret y WebHook (opcional)
+
+Para la implementacion de CI/CD a partir de este repositorio se deberán generar secret y webhook(opcional) para clonar el repositorio en caso de necesitar hacer un fork.
+
+```bash
+
+# k8s/secret.yaml
+
+kind: Secret
+apiVersion: v1
+metadata:
+  name: gittoken
+data:
+  password: maximilianoPizarro
+  username: token
+type: kubernetes.io/basic-auth
+
+# k8s/secret.yaml
+
+kind: Secret
+apiVersion: v1
+metadata:
+  name: hookbfa
+data:
+  WebHookSecretKey: hooksecret
+type: Opaque
+
+```
+
+
 ## Security Context Contraint (opcional - solo si toma la imagen de dockerhub)
 
 El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para generar un contexto de id arbitrario se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html). En caso de querer generar el pull directo con dockerhub será requisito aplicar el SCC con el siguiente comando.
@@ -173,11 +176,11 @@ El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para 
 
 ```
 
-## Contribucion
+## Contacto
 
 
-| 🔭 Más info bfa.ar     	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
+| 🔭 Red BFA    	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
 |---------------------------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| 📫 contacto:   	| <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin">  	|
+| 📫 Personal:   	| <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin">  	|
 |            	|       	|
 
