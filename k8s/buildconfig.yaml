@@ -1,13 +1,13 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: bfadocker-oficial
+  name: nodo-bfa-core-fork
 spec:
   nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: 'nodo-bfa:test'
+      name: 'nodo-bfa-core-fork:test'
   resources: {}
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5
@@ -20,11 +20,9 @@ spec:
     git:
       uri: 'https://gitlab.bfa.ar/docker/bfanodo.git'
       ref: master
-  triggers:
-    - type: ImageChange
-      imageChange: {}
-    - type: ConfigChange
-  runPolicy: Serial
+    contextDir: "bfatoolbase"  
+    dockerfile: "FROM bfaar/nodo:test \nUSER root \nRUN chown 30303:0 ${BFAHOME} && chgrp -R 0 ${BFAHOME} && chmod -R g=u ${BFAHOME} \nUSER bfa"
+  runPolicy: Serial 
 ---
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
@@ -88,3 +86,5 @@ spec:
       github:
         secret: hookbfa
   runPolicy: Serial  
+
+ 

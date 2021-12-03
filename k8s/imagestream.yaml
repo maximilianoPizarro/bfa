@@ -37,6 +37,17 @@ metadata:
 kind: ImageStream
 apiVersion: image.openshift.io/v1
 metadata:
+  name: nodo-bfa-core-fork
+  labels:
+    app: nodo-bfa
+    app.kubernetes.io/component: nnodo-bfa-core-fork
+    app.kubernetes.io/instance: nodo-bfa-core-fork
+    app.kubernetes.io/name: nnodo-bfa-core-fork
+    app.kubernetes.io/part-of: nodo-bfa-core-fork    
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
   name: nodo-bfa-toolbase
 spec:
   lookupPolicy:
