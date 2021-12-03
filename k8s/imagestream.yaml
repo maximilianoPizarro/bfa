@@ -26,6 +26,17 @@ spec:
 kind: ImageStream
 apiVersion: image.openshift.io/v1
 metadata:
+  name: nodo-bfa-core
+  labels:
+    app: nodo-bfa
+    app.kubernetes.io/component: nodo-bfa-core
+    app.kubernetes.io/instance: nodo-bfa-core
+    app.kubernetes.io/name: nodo-bfa-core
+    app.kubernetes.io/part-of: nodo-bfa-core
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
   name: nodo-bfa-toolbase
 spec:
   lookupPolicy:
@@ -46,7 +57,6 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: client-go
-  namespace: mpizarro-dev
 spec:
   lookupPolicy:
     local: false
@@ -61,3 +71,22 @@ spec:
       importPolicy: {}
       referencePolicy:
         type: Local
+---        
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: solc
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: 0.6.3-alpine
+      annotations:
+        openshift.io/imported-from: 'ethereum/solc:0.6.3-alpine'
+      from:
+        kind: DockerImage
+        name: 'ethereum/solc:0.6.3-alpine'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Local        

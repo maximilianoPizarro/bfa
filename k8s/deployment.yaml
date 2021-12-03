@@ -1,0 +1,146 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: nodo-bfa
+  labels:
+    app: nodo-bfa
+    app.kubernetes.io/component: nodo-bfa
+    app.kubernetes.io/instance: nodo-bfa
+    app.kubernetes.io/name: nodo-bfa
+    app.openshift.io/runtime: golang
+spec:
+  replicas: 1
+  selector:
+    app: nodo-bfa
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodo-bfa
+        deploymentconfig: nodo-bfa
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      restartPolicy: Always
+      serviceAccountName: default
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - name: nodo-bfa
+          image: 'nodo-bfa:test'
+          ports:
+            - containerPort: 30303
+              protocol: TCP
+            - containerPort: 30303
+              protocol: UDP
+            - containerPort: 8545
+              protocol: TCP
+            - containerPort: 8546
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: nodo-bfa-1
+              mountPath: /home/bfa/bfa/test2network/node
+            - name: docker-config
+              mountPath: /home/bfa/bfa/test2network/docker-config.toml
+              subPath: docker-config.toml                      
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      serviceAccount: default
+      volumes:
+        - name: nodo-bfa-1
+          persistentVolumeClaim:
+            claimName: pvc-bfa
+        - name: docker-config
+          configMap:
+            defaultMode: 420
+            name: docker-config            
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+
+---
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: nodo-bfa-core
+  labels:
+    app: nodo-bfa-core
+    app.kubernetes.io/component: nodo-bfa-core
+    app.kubernetes.io/instance: nodo-bfa-core
+    app.kubernetes.io/name: nodo-bfa-core
+    app.openshift.io/runtime: golang
+spec:
+  replicas: 1
+  selector:
+    app: nodo-bfa-core
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodo-bfa-core
+        deploymentconfig: nodo-bfa-core
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      restartPolicy: Always
+      serviceAccountName: default
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - name: nodo-bfa-core
+          image: 'bfaar/nodo:test'
+          ports:
+            - containerPort: 30303
+              protocol: TCP
+            - containerPort: 30303
+              protocol: UDP
+            - containerPort: 8545
+              protocol: TCP
+            - containerPort: 8546
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: nodo-bfa-core-1
+              mountPath: /home/bfa/bfa/test2network/node
+            - name: docker-config
+              mountPath: /home/bfa/bfa/test2network/docker-config.toml
+              subPath: docker-config.toml                      
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      serviceAccount: default
+      volumes:
+        - name: nodo-bfa-core-1
+          persistentVolumeClaim:
+            claimName: pvc-bfa
+        - name: docker-config
+          configMap:
+            defaultMode: 420
+            name: docker-config            
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
