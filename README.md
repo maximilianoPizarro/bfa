@@ -167,7 +167,7 @@ type: Opaque
 
 ## Security Context Contraint (opcional - solo si toma la imagen de dockerhub)
 
-El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para generar un contexto de id arbitrario se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html). En caso de querer generar el pull directo con dockerhub será requisito aplicar el SCC con el siguiente comando.
+El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para generar un contexto de id arbitrario en Openshift se agrego el step para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html). En caso de querer generar el pull directo desde dockerhub será requisito aplicar el SCC con el siguiente comando.
 
 ```python
 # requiere permisos cluster-admin (no disponibles en el cluster sandbox)
@@ -178,7 +178,7 @@ El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para 
 
 ## Acerca de 
 
-Cada transacción sobre la es stampada sobre plataforma Blockchain Federal Argentina en una fecha cierta por medio de nodos transaccionales registrados en bfa.ar a través de un Smart Contract llamado TIME STAMP AUTHORITY que se encuentra desplegado en la red de pares de nodos de Clientes Ethereum con dos únicas operaciones disponibles get y put del digesto criptográfico. El sello de tiempo es un servicio de la plataforma en donde cualquier usuario registrado o no puede consultar si el hash de un documento existe en la cadena de bloques informando fecha cierta, autoría y bloque de la transacción. Conoce más ingresando a página #BlockchainFederalArgentina #Sumate #TransformaciónDigital
+Cada transacción es ingestada sobre plataforma Blockchain Federal Argentina en una fecha cierta por medio de nodos transaccionales registrados en bfa.ar a través de un Smart Contract llamado TIME STAMP AUTHORITY que se encuentra desplegado en la red de pares de nodos de Clientes Ethereum con dos únicas operaciones disponibles get y put del digesto criptográfico. El sello de tiempo es un servicio de la plataforma en donde cualquier usuario registrado o no puede consultar si el hash de un documento existe en la cadena de bloques informando fecha cierta, autoría y bloque de la transacción. Conoce más ingresando a página #BlockchainFederalArgentina #Sumate #TransformaciónDigital
 
 | 🔭 Red BFA    	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
 |---------------------------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
