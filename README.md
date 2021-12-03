@@ -1,6 +1,6 @@
-# Nucleo BFA para Kubernetes
+# Nodo Gateway BFA para Kubernetes
 
-El propósito de este proyecto es extender el repositorio base [bfa](https://gitlab.bfa.ar/docker/bfanodo) a las plataformas de contenedores. 
+El propósito de este proyecto es generar los objetos kubernetes en base a la imagen del nodo en testnet del el repositorio del [nodo bfa](https://gitlab.bfa.ar/docker/bfanodo) para el despliegue en las plataformas de contenedores. 
 
 
 <img src="https://img.shields.io/badge/redhat-CC0000?style=for-the-badge&logo=redhat&logoColor=white" alt="Redhat">
@@ -11,12 +11,12 @@ Verificado en Sandbox RedHat OpenShift Dedicated (Openshift 4.9) sincronizando c
   <img src="https://drive.google.com/u/0/uc?id=1sq9GXlpG-Q_73pFrb-u35EIZYfrft_GV&export=download" width="800" title="hover text">
 </p>  
 
-## Installation
+## Instalación
 
-Logear con el cliente del cluster, clonar el repositorio e importar todos los objetos k8s en el namespace.
+Autenticacar con el cliente del cluster, clonar el repositorio e importar todos los objetos k8s en el namespace.
 
 ```bash
-kubectl apply -f k8s/ .
+kubectl apply -f k8s/ . -n $NAMESPACE
 ```
 ## Dockerfile
 
@@ -57,8 +57,8 @@ type: Opaque
 
 ## ImageStream
 
-Por lo menos debe existir la imagen nodo-bfa, recomiendo descargar 
-a registry internal por el limite de descargas de dockerhub.
+Las imagenes se agregan en el paso de appy, se recomienda hacer un pull
+a registry internal por el limite de descargas de dockerhub a fines de pruebas.
 
 ```bash
 # k8s/imagestream.yaml
@@ -92,7 +92,7 @@ spec:
 
 ## Volumen Persistente
 
-Es necesario percisir la cadena en un volumen persistente, el pvc se genera en el import de /k8s, tengan en cuenta el storage segun los requerimientos del tipo de nodo gateway a desplegar 300Gi minimo y en ascenso.
+Es necesario percisir la cadena de blockchain en un volumen persistente, el pvc se genera en el import de /k8s, tengan en cuenta el storage segun los requerimientos del tipo de nodo gateway a desplegar 300Gi minimo y en ascenso.
 
 ```python
 
@@ -114,7 +114,7 @@ spec:
 
 ## ConfigMap
 
-se creará el configmap docker-config  y se montará como volumen, principal atención a esta sección del DeploymentConfig, existe tambien un .env en donde se pueden sobreescribir las variables de entorno y cambiar de testnet a produccion por ejemplo
+Se creará el configmap docker-config y se montará como volumen.
 ```python
 # k8s/deploymentconfig.yaml
 
@@ -123,14 +123,16 @@ volumeMounts:
     mountPath: /home/bfa/bfa/test2network/node
   - name: docker-config
     mountPath: /home/bfa/bfa/test2network/docker-config.toml
-    subPath: docker-config.toml                      
-                   
+    subPath: docker-config.toml
+  - name: env
+    mountPath: /home/bfa/bfa/bin/env
+    subPath: env                                               
 
 ```
 
 ## Security Context Contraint (solo si no buildea el Dockerfile)
 
-El user por defecto de la imagen base del nodo corresponde al 30303, para generar un contexto de id arbitrario se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html)
+El user por defecto de la imagen base del nodo corresponde al 30303 (bfa), para generar un contexto de id arbitrario se agrego el paso para poder asignarlo en el Dockerfile del repo segun las mejores prácticas de creación de contenedores de la [documentación oficial de redhat](https://docs.openshift.com/container-platform/4.7/openshift_images/create-images.html). En caso de querer generar el pull directo con dockerhub será requisito aplicar el SCC con el siguiente comando.
 
 ```python
 # requiere permisos cluster-admin
@@ -142,8 +144,8 @@ El user por defecto de la imagen base del nodo corresponde al 30303, para genera
 ## Contribucion
 
 
-| 🔭 More info bfa.ar     	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
+| 🔭 Más info bfa.ar     	| <a href="https://bfa.ar/" target="_blank" alt="Blockchain Federal Argentina"><img src="https://bfa.ar/themes/bfa/logo.svg?style=for-the-badge" alt="Blockchain Federal Argentina" width="200" height="90"></a>                     	|
 |---------------------------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| 📫 How to reach me:   	| <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin">  	|
+| 📫 Comó encontrarme:   	| <a href="https://www.linkedin.com/in/maximiliano-gregorio-pizarro-consultor-it"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin">  	|
 |            	|       	|
 

@@ -58,7 +58,7 @@ spec:
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: bfadocker-fork-core
+  name: bfadocker-core
 spec:
   nodeSelector: null
   output:

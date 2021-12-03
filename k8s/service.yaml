@@ -41,3 +41,91 @@ spec:
     deploymentconfig: nodo-bfa
 status:
   loadBalancer: {}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nodo-bfa-core
+  labels:
+    app: nodo-bfa-core
+    app.kubernetes.io/component: nodo-bfa-core
+    app.kubernetes.io/instance: nodo-bfa-core
+    app.kubernetes.io/name: nodo-bfa-core
+    app.kubernetes.io/part-of: nodo-bfa-core
+    app.openshift.io/runtime-version: test
+spec:
+  clusterIP: 172.30.90.182
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 30303-tcp
+      protocol: TCP
+      port: 30303
+      targetPort: 30303
+    - name: 30303-udp
+      protocol: UDP
+      port: 30303
+      targetPort: 30303
+    - name: 8545-tcp
+      protocol: TCP
+      port: 8545
+      targetPort: 8545
+    - name: 8546-tcp
+      protocol: TCP
+      port: 8546
+      targetPort: 8546
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.90.182
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: nodo-bfa-core
+    deploymentconfig: nodo-bfa-core
+status:
+  loadBalancer: {}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nodo-bfa-core-fork
+  labels:
+    app: nodo-bfa-core-fork
+    app.kubernetes.io/component: nodo-bfa-core-fork
+    app.kubernetes.io/instance: nodo-bfa-core-fork
+    app.kubernetes.io/name: nodo-bfa-core-fork
+    app.kubernetes.io/part-of: nodo-bfa-core-fork
+    app.openshift.io/runtime-version: test
+spec:
+  clusterIP: 172.30.90.183
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 30303-tcp
+      protocol: TCP
+      port: 30303
+      targetPort: 30303
+    - name: 30303-udp
+      protocol: UDP
+      port: 30303
+      targetPort: 30303
+    - name: 8545-tcp
+      protocol: TCP
+      port: 8545
+      targetPort: 8545
+    - name: 8546-tcp
+      protocol: TCP
+      port: 8546
+      targetPort: 8546
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.90.183
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: nodo-bfa-core-fork
+    deploymentconfig: nodo-bfa-core-fork
+status:
+  loadBalancer: {}
