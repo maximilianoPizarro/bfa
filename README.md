@@ -11,7 +11,7 @@ El propósito de este proyecto consiste en generar los objetos kubernetes en bas
 En este caso se verifico el funcionamiento en [Sandbox RedHat OpenShift Dedicated](https://developers.redhat.com/developer-sandbox) (Openshift 4.9) sincronizando con la red de pruebas testnet. 
 
 <p align="left">
-  <img src="https://drive.google.com/u/0/uc?id=1sq9GXlpG-Q_73pFrb-u35EIZYfrft_GV&export=download" width="626" height="1367" title="Run On Openshift">
+  <img src="https://drive.google.com/file/d/1uKhb9v05qYfLvwldM_CQ7xjxRG2JyvRE/view?usp=sharing" width="684" height="313" title="Run On Openshift">
 </p>  
 
 ## Instalación
